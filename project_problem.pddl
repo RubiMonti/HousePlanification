@@ -1,9 +1,9 @@
 (define (problem move-probl)
 (:domain project)
 (:objects 
-    Room1 Room2 Room3 Room4 - room
-    Corridor1 Corridor2 - corridor
-    door1 door2 - door
+    Room1 Room2 Room3 Room4 Room5 Room6 Room7 Room8 Room9 - room
+    Corridor1 Corridor2 Corridor3 - corridor
+    door1 door2 door3 door4 door5 door6 door7 - door
     zone1 zone2 zone3 zone4 zone5 - zone
     elevator - elevator
 )
@@ -12,8 +12,14 @@
     (at Room3)
     (open None)
 
+    ;; Doors
     (close door1)
     (close door2)
+    (close door3)
+    (close door4)
+    (close door5)
+    (close door6)
+    (close door7)
 
     ;; Zones - Rooms
     (in Room1 zone1)
@@ -29,6 +35,7 @@
     (in zone5 Room2)
 
     ;; Connections between every location
+    ;; -- 1st Floor
     (connected Corridor1 Room2 None)
     (connected Room2 Corridor1 None)
     (connected Room2 Room4 None)
@@ -39,6 +46,22 @@
     (connected Room1 Corridor1 door1)
     (connected Corridor1 Room1 door1)
 
+    ;; -- 2nd Floor
+    (connected Corridor2 Corridor3 None)
+    (connected Corridor3 Corridor2 None)
+
+    (connected Room5 Corridor2 door4)
+    (connected Corridor2 Room5 door4)
+    (connected Room6 Corridor2 door3)
+    (connected Corridor2 Room6 door3)
+
+    (connected Room7 Corridor3 door5) 
+    (connected Corridor3 Room7 door5) 
+    (connected Room9 Corridor3 door6) 
+    (connected Corridor3 Room9 door6)
+    (connected Room8 Corridor3 door7)
+    (connected Corridor3 Room8 door7)    
+
     ;; Elevator
     (ready Corridor2 elevator)
     (not-ready Corridor1 elevator)
@@ -48,7 +71,7 @@
 
 (:goal 
   (and 
-    (at Corridor2)
+    (at Room8)
   )
 )
 )
