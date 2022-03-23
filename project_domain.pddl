@@ -3,8 +3,8 @@
 
 (:types
     room zone corridor - location
-    door
-    elevator
+    door 
+    elevator  
 )
 
 (:predicates 
@@ -15,6 +15,11 @@
   (close ?d - door)
 
   ;;(at-obj ?o - obj ?l - location)
+  
+  ;; Elevator
+  (floor-connection ?l1 ?l2 - location ?e - elevator)
+  (ready ?l - location ?e - elevator)
+  (not-ready ?l - location ?e - elevator)
 )
 
 (:constants None - door)
@@ -70,6 +75,41 @@
     :effect 
     (and
       (open ?door) 
+    )
+)
+
+;; Elevator actions
+(:action take-elevator
+    :parameters (?from ?to - location ?elev - elevator)
+    :precondition 
+    (and 
+      (at ?from)
+      (ready ?from ?elev)
+      (not-ready ?to ?elev)
+      (floor-connection ?from ?to ?elev)
+    )
+    :effect 
+    (and
+      (at ?to) 
+      (not (at ?from))
+      (ready ?to ?elev)
+      (not-ready ?from ?elev)
+    )
+)
+
+(:action wait-elevator
+    :parameters (?from ?to - location ?elev - elevator)
+    :precondition 
+    (and 
+      (at ?from)
+      (not-ready ?from ?elev)
+      (ready ?to ?elev)
+      (floor-connection ?from ?to ?elev)
+    )
+    :effect 
+    (and
+      (ready ?from ?elev)
+      (not-ready ?to ?elev)
     )
 )
 )

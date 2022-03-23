@@ -2,9 +2,10 @@
 (:domain project)
 (:objects 
     Room1 Room2 Room3 Room4 - room
-    Corridor1 - corridor
+    Corridor1 Corridor2 - corridor
     door1 door2 - door
     zone1 zone2 zone3 zone4 zone5 - zone
+    elevator - elevator
 )
 (:init 
     ;; Initial state
@@ -37,11 +38,17 @@
     (connected Room3 Room1 door2)
     (connected Room1 Corridor1 door1)
     (connected Corridor1 Room1 door1)
+
+    ;; Elevator
+    (ready Corridor2 elevator)
+    (not-ready Corridor1 elevator)
+    (floor-connection Corridor1 Corridor2 elevator)
+    (floor-connection Corridor2 Corridor1 elevator)
 )
 
 (:goal 
   (and 
-    (at zone3)
+    (at Corridor2)
   )
 )
 )
