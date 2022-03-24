@@ -6,11 +6,15 @@
     door1 door2 door3 door4 door5 door6 door7 - door
     zone1 zone2 zone3 zone4 zone5 - zone
     elevator - elevator
+    object - object
+    wall_E - robot
 )
 (:init 
     ;; Initial state
-    (at Room3)
+    (robot_at wall_E Room3)
+    ;; (at Room3)
     (open None)
+    (object_at object zone2)
 
     ;; Doors
     (close door1)
@@ -71,7 +75,7 @@
 
 (:goal 
   (and 
-    (at Room8)
+    (robot_at wall_E Room8)
   )
 )
 )
