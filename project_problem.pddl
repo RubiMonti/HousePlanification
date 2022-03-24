@@ -7,12 +7,14 @@
     zone1 zone2 zone3 zone4 zone5 - zone
     elevator - elevator
     object - object
+    hand - gripper
     wall_E - robot
 )
 (:init 
     ;; Initial state
     (robot_at wall_E Room3)
-    ;; (at Room3)
+    (gripper_at hand wall_E)
+    (gripper_free hand)
     (open None)
     (object_at object zone2)
 
@@ -75,7 +77,7 @@
 
 (:goal 
   (and 
-    (robot_at wall_E Room8)
+    (object_at object Room9)
   )
 )
 )
